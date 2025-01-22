@@ -1,3 +1,4 @@
+import React from 'react'; // Import React
 import { useState } from "react";
 import VrboUrl from "../assets/images/vrbo.png";
 import ExpediaUrl from "../assets/images/expedia.png";
@@ -19,7 +20,7 @@ function Home() {
   const [url, setUrl] = useState("");
   const [result, setResult] = useState(null);
   const [flag, setFlag] = useState(false);
-  
+
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const handleInputChange = (e) => {
