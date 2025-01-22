@@ -39,15 +39,15 @@ function Home() {
             searchText: url,
           }
         );
-        // console.log(response);
-        // if (response.data.status == "success") {
-        //   setResult(response.data); // Store the results in state
-        //   setFlag(true);
-        // } else {
-        //   setResult(null); //
-        //   setFlag(false);
-        // }
-        // setError(null); // Clear any previous errors
+        console.log(response);
+        if (response.data.status == "success") {
+          setResult(response.data); // Store the results in state
+          setFlag(true);
+        } else {
+          setResult(null); //
+          setFlag(false);
+        }
+        setError(null); // Clear any previous errors
         setIsLoading(false);
       } catch (error) {
         setError("There was an error making the request"); // Set error message
