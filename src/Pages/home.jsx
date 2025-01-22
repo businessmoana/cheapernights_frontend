@@ -19,6 +19,7 @@ function Home() {
   const [url, setUrl] = useState("");
   const [result, setResult] = useState(null);
   const [flag, setFlag] = useState(false);
+  
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const handleInputChange = (e) => {
