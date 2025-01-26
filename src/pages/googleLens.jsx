@@ -16,7 +16,7 @@ const sourceSiteList = [
   "Agoda.com",
 ];
 
-function Home() {
+function GoogleLens() {
   const [url, setUrl] = useState("");
   const [result, setResult] = useState(null);
   const [flag, setFlag] = useState(false);
@@ -34,7 +34,7 @@ function Home() {
       console.log("Submitted URL:", url);
       try {
         const response = await axios.post(
-          `${import.meta.env.VITE_API_URL}/search`,
+          `${import.meta.env.VITE_API_URL}/googleLensSearch`,
           {
             searchText: url,
           }
@@ -297,4 +297,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default GoogleLens;

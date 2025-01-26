@@ -1,7 +1,8 @@
 import "./App.css";
 import React from 'react'; // Import React
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/home";
+import GoogleLens from "./pages/googleLens";
+import Google from "./pages/google";
 import Layout from "./Layout";
 
 function App() {
@@ -13,7 +14,15 @@ function App() {
             path="/"
             element={
               <Layout>
-                <Home />
+                <GoogleLens />
+              </Layout>
+            }
+          />
+          <Route
+            path="/google"
+            element={
+              <Layout>
+                <Google />
               </Layout>
             }
           />
