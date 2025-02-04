@@ -1,4 +1,4 @@
-import React from "react"; // Import React
+import React, { useEffect } from "react"; // Import React
 import { useState } from "react";
 import VrboUrl from "../assets/images/vrbo.png";
 import ExpediaUrl from "../assets/images/expedia.png";
@@ -42,7 +42,7 @@ function Google() {
 
     fetchIpAddress();
   }, []);
-  
+
   const handleSubmit = async (e) => {
     if (url) {
       setIsLoading(true);
