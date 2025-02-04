@@ -1,4 +1,4 @@
-import React from 'react'; // Import React
+import React from "react"; // Import React
 import { useState } from "react";
 import VrboUrl from "../assets/images/vrbo.png";
 import ExpediaUrl from "../assets/images/expedia.png";
@@ -20,13 +20,29 @@ function Google() {
   const [url, setUrl] = useState("");
   const [result, setResult] = useState(null);
   const [flag, setFlag] = useState(false);
-
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [ipAddress, setIpAddress] = useState("");
+
   const handleInputChange = (e) => {
     setUrl(e.target.value);
   };
 
+  useEffect(() => {
+    const fetchIpAddress = async () => {
+      try {
+        const response = await fetch("https://api.ipify.org?format=json");
+        const data = await response.json();
+        setIpAddress(data.ip);
+        console.log("data=>", data)
+      } catch (error) {
+        console.error("Error fetching IP address:", error);
+      }
+    };
+
+    fetchIpAddress();
+  }, []);
+  
   const handleSubmit = async (e) => {
     if (url) {
       setIsLoading(true);
