@@ -23,6 +23,7 @@ function Google() {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [ipAddress, setIpAddress] = useState("");
+  const [ipInfo, setIpInfo] = useState(null);
 
   const handleInputChange = (e) => {
     setUrl(e.target.value);
@@ -33,8 +34,8 @@ function Google() {
       try {
         const response = await fetch("https://api.ipify.org?format=json");
         const data = await response.json();
+        fetchIpInfo(data.ip);
         setIpAddress(data.ip);
-        console.log("data=>", data)
       } catch (error) {
         console.error("Error fetching IP address:", error);
       }
@@ -43,19 +44,29 @@ function Google() {
     fetchIpAddress();
   }, []);
 
+  const fetchIpInfo = async (ipAddress) => {
+    try {
+      const response = await fetch(`https://ipapi.co/${ipAddress}/json/`);
+      const data = await response.json();
+      setIpInfo(data);
+    } catch (error) {
+      console.error("Error fetching IP information:", error);
+    }
+  };
+
+  console.log(ipInfo);
   const handleSubmit = async (e) => {
     if (url) {
       setIsLoading(true);
       e.preventDefault();
-      console.log("Submitted URL:", url);
       try {
         const response = await axios.post(
           `${import.meta.env.VITE_API_URL}/googleSearch`,
           {
             searchText: url,
+            ipAdress: ipAddress,
           }
         );
-        console.log(response);
         if (response.data.status == "success") {
           setResult(response.data); // Store the results in state
           setFlag(true);
