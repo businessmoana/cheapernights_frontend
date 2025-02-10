@@ -22,7 +22,7 @@ function Google() {
   const [flag, setFlag] = useState(false);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [ipInfo, setIpInfo] = useState(null);
+  const [ipAddress, setIpAddress] = useState(null);
 
   const handleInputChange = (e) => {
     setUrl(e.target.value);
@@ -33,7 +33,7 @@ function Google() {
       try {
         const response = await fetch("https://api.ipify.org?format=json");
         const data = await response.json();
-        fetchIpInfo(data.ip);
+        setIpAddress(data.ip);
       } catch (error) {
         console.error("Error fetching IP address:", error);
       }
@@ -42,15 +42,7 @@ function Google() {
     fetchIpAddress();
   }, []);
 
-  const fetchIpInfo = async (ipAddress) => {
-    try {
-      const response = await fetch(`https://ipapi.co/${ipAddress}/json/`);
-      const data = await response.json();
-      setIpInfo(data);
-    } catch (error) {
-      console.error("Error fetching IP information:", error);
-    }
-  };
+  
   const handleSubmit = async (e) => {
     if (url) {
       setIsLoading(true);
@@ -60,7 +52,7 @@ function Google() {
           `${import.meta.env.VITE_API_URL}/googleSearch`,
           {
             searchText: url,
-            currencyType: ipInfo.currency,
+            ipAddress: ipAddress,
           }
         );
         if (response.data.status == "success") {
